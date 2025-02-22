@@ -106,3 +106,38 @@ export const InputCpf = styled.input`
   outline: none; 
   box-sizing: border-box; 
 `;
+
+export const PassWord = styled.div`
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 85vw;  
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+`;
+
+export const IconePassword = styled.div`
+  width: 8vw;  
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  svg {
+    color: #e30de3; 
+    font-size: 3rem; 
+  }
+`;
+
+export const InputPassword = styled.input`
+  background-color: rgba(255, 255, 255, 0.0);
+  width: 67vw;  
+  height: 8vh; 
+  padding: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  font-size: 25px; 
+  outline: none; 
+  box-sizing: border-box; 
+`;
