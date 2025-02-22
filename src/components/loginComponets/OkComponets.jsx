@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export function OkComponets({cpfEmail, password }) {
 
-    const { setToken } = useContext(AuthContext);
+    const { setAuthToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -19,7 +19,7 @@ export function OkComponets({cpfEmail, password }) {
         axios.post(urlCode, data)
             .then((response) => {
                 const token = response.data[1].token;
-                setToken(token)
+                setAuthToken(token)
                 if (token) {
                     localStorage.setItem('authToken', token);
                     navigate("/home");
