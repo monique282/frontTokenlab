@@ -42,6 +42,7 @@ export const IconeName = styled.div`
   svg {
     color: #e30de3; 
     font-size: 3rem; 
+    margin-right : 15px ;
   }
 `;
 
@@ -66,7 +67,8 @@ export const IconeEmail = styled.div`
   border-radius: 4px;
   svg {
     color: #e30de3; 
-    font-size: 3rem; 
+    font-size: 3rem;
+    margin-right : 15px ; 
   }
 `;
 
@@ -92,6 +94,7 @@ export const IconeCpf = styled.div`
   svg {
     color: #e30de3; 
     font-size: 3rem; 
+    margin-right : 15px ;
   }
 `;
 
@@ -126,7 +129,8 @@ export const IconePassword = styled.div`
   border-radius: 4px;
   svg {
     color: #e30de3; 
-    font-size: 3rem; 
+    font-size: 3rem;
+    margin-right : 2px ;
   }
 `;
 
@@ -140,4 +144,16 @@ export const InputPassword = styled.input`
   font-size: 25px; 
   outline: none; 
   box-sizing: border-box; 
+`;
+
+export const Ok = styled.div`
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 70vw;   
+  height: 10vh;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: black
 `;

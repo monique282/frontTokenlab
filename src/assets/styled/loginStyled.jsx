@@ -96,15 +96,15 @@ export const SaveRegister = styled.div`
   width: 85vw;  
   height: 10vh;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 `;
 
-export const Register = styled.div`
-  width: 40vw;  
+export const RegisterLink = styled.div`
+  width: 50vw;  
   height: 8vh;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 `;
 
