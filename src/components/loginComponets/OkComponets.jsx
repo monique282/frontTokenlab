@@ -11,7 +11,7 @@ export function OkComponets({cpfEmail, password }) {
 
 
     function LoginPost() {
-        const urlCode = `${import.meta.env.VITE_API_URL}/user/login`;
+        const urlCode = `${import.meta.env.VITE_API_URL}/login`;
         const data = {
             mode: cpfEmail,
             password
