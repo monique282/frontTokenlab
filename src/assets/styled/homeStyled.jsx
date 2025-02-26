@@ -84,14 +84,14 @@ export const Modal = styled.div`
   padding: 20px;
   border-radius: 8px;
   width: 50vw;
-  height: 50vh;
+  height: 70vh;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   min-width: 300px;
 
   textarea {
     width: 98%;
-    height: 80%;
+    height: 55%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -99,6 +99,7 @@ export const Modal = styled.div`
     font-size: 12px;
     line-height: 1.4;
     overflow-y: auto; 
+    margin-bottom: 10px;
   }
 
   input {

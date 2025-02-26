@@ -16,6 +16,11 @@ export default function Home() {
     const [selectedDay, setSelectedDay] = useState(null);
     const [eventText, setEventText] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [eventDetails, setEventDetails] = useState({
+        text: "",
+        startTime: "",
+        endTime: ""
+    });
 
     // Primeiro dia do mês atual.
     const startOfMonth = currentDate.startOf("month");
@@ -67,7 +72,7 @@ export default function Home() {
             </CalendarContainer>
 
             {isModalOpen && (
-                <OverlayComponets authToken={authToken} selectedDay={selectedDay} setSelectedDay={setSelectedDay} setIsModalOpen={setIsModalOpen} setEvents={setEvents} setEventText={setEventText} eventText={eventText} events={events}/>
+                <OverlayComponets authToken={authToken} selectedDay={selectedDay} setSelectedDay={setSelectedDay} setIsModalOpen={setIsModalOpen} setEvents={setEvents} setEventText={setEventText} eventDetails={eventDetails} events={events} setEventDetails = { setEventDetails }/>
             )}
         </All>
     );

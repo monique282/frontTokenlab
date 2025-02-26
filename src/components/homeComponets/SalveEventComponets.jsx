@@ -1,26 +1,36 @@
 import axios from "axios";
 
-export function saveEvent(selectedDay, eventText, authToken, setEvents, setSelectedDay, setEventText, closeModal) {
-    if (!selectedDay || !eventText.trim()) return;
+export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventText, closeModal, setEventDetails) {
+    if (!selectedDay || !eventDetails.text.trim()) return;
 
     const formattedDate = selectedDay.replace(/-/g, "/");
     const urlCode = `${import.meta.env.VITE_API_URL}/events`;
     const data = {
-        text: eventText,
-        day: formattedDate
+        text: eventDetails.text,
+        day: formattedDate,
+        startTime: eventDetails.startTime, 
+        endTime: eventDetails.endTime 
     };
+
     axios.post(urlCode, data, {
         headers: { Authorization: `Bearer ${authToken}` }
-        , data
     })
-
         .then(() => {
             setEvents(prevEvents => ({
                 ...prevEvents,
-                [selectedDay]: eventText
+                [selectedDay]: {
+                    text: eventDetails.text,
+                    startTime: eventDetails.startTime,
+                    endTime: eventDetails.endTime
+                }
             }));
+
             setSelectedDay(null);
-            setEventText("");
+            setEventDetails({
+                text: "",
+                startTime: "",
+                endTime: ""
+            });            
             closeModal();
         })
         .catch(error => {
