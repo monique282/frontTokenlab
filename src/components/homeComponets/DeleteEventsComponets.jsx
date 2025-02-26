@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export function deleteEvent(selectedDay, events, setEvents, closeModal, authToken ) {
-    if (!selectedDay || !events[selectedDay]) return;
+export function deleteEvent(eventId, selectedDay, setEvents, authToken) {
+    console.log("token", authToken)
+    if (!eventId) return;
 
-    const eventId = events[selectedDay].id;
     const urlCode = `${import.meta.env.VITE_API_URL}/events/${eventId}`;
 
     axios.delete(urlCode, {
@@ -12,10 +12,9 @@ export function deleteEvent(selectedDay, events, setEvents, closeModal, authToke
         .then(() => {
             setEvents(prevEvents => {
                 const updatedEvents = { ...prevEvents };
-                delete updatedEvents[selectedDay];
+                updatedEvents[selectedDay] = updatedEvents[selectedDay].filter(event => event.id !== eventId);
                 return updatedEvents;
             });
-            closeModal();
         })
         .catch(error => {
             console.error("Erro ao excluir o evento:", error);

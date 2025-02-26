@@ -2,14 +2,15 @@ import "dayjs/locale/pt-br";
 import { Button, Modal, Overlay, StartTime, EndTime, TextTime, TextTimeListEvent } from "../../assets/styled/homeStyled";
 import { saveEvent } from "./SalveEventComponets";
 import { deleteEvent } from "./DeleteEventsComponets";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { closeModal } from "./CloseModalcomponets";
 import { ListEventsComponets } from "./ListEventsComponets";
 
 export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails, }) {
+    const [selectedEventId, setSelectedEventId] = useState(null);
     const prevSelectedDayRef = useRef(selectedDay);
     
-
+console.log(events)
     function handleSaveEvent() {
         const { text, startTime, endTime } = eventDetails;
         if (!text.trim() || !startTime || !endTime) {
@@ -22,6 +23,17 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
     const selectedEvents = events[selectedDay] || [];
     selectedEvents.sort((a, b) => a.startTime.localeCompare(b.startTime));
 
+    function handleDeleteEvent() {
+       
+        if (!selectedEventId) {
+            alert("Selecione um evento para excluir.");
+            return;
+        }
+        deleteEvent(selectedEventId, selectedDay, setEvents, authToken); 
+        closeModal(setIsModalOpen, setSelectedDay, setEventDetails);
+        setSelectedEventId(null); 
+    }
+
     useEffect(() => {
         if (prevSelectedDayRef.current !== selectedDay) {
             setEventDetails({
@@ -29,6 +41,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                 startTime: "",
                 endTime: ""
             });
+            setSelectedEventId(null);
             prevSelectedDayRef.current = selectedDay;
         }
     }, [selectedDay, setEventDetails]);
@@ -60,12 +73,18 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                             />
                         </EndTime>
                     </TextTime>
-                    <ListEventsComponets setEventDetails={setEventDetails} selectedEvents={selectedEvents}/>
+                    <ListEventsComponets
+                        setEventDetails={(details) => {
+                            setEventDetails(details);
+                            setSelectedEventId(details.id);
+                        }}
+                        selectedEvents={events[selectedDay] || []}
+                    />
                 </TextTimeListEvent>
                 <div>
                     <Button onClick={handleSaveEvent}>Salvar</Button>
                     <Button onClick={() => closeModal(setIsModalOpen, setSelectedDay, setEventDetails)}>Cancelar</Button>
-                    <Button onClick={() => deleteEvent(selectedDay, events, setEvents, closeModal, authToken)}>Excluir</Button>
+                    <Button onClick={handleDeleteEvent} >Excluir</Button>
                 </div>
             </Modal>
         </Overlay>
