@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export function deleteEvent(eventId, selectedDay, setEvents, authToken) {
-    console.log("token", authToken)
     if (!eventId) return;
 
     const urlCode = `${import.meta.env.VITE_API_URL}/events/${eventId}`;

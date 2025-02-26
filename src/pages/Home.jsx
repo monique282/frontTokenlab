@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { All, CalendarContainer, Day, Grid, } from "../assets/styled/homeStyled";
 import { HeaderComponets } from "../components/homeComponets/HeaderComponets";
 import { OverlayComponets } from "../components/homeComponets/OverlayComponets";
-import { fetchEvents } from "../components/homeComponets/RequestEvents";
+import { fetchEvents } from "../components/homeComponets/RequestEventsComponets";
 import { AuthContext } from "../contexts/contex";
 
 dayjs.locale("pt-br");

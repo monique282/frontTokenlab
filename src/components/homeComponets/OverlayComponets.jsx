@@ -5,12 +5,12 @@ import { deleteEvent } from "./DeleteEventsComponets";
 import { useEffect, useRef, useState } from "react";
 import { closeModal } from "./CloseModalcomponets";
 import { ListEventsComponets } from "./ListEventsComponets";
+import { updateEvent } from "./UpdateEventComponets";
 
 export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails, }) {
     const [selectedEventId, setSelectedEventId] = useState(null);
     const prevSelectedDayRef = useRef(selectedDay);
     
-console.log(events)
     function handleSaveEvent() {
         const { text, startTime, endTime } = eventDetails;
         if (!text.trim() || !startTime || !endTime) {
@@ -24,7 +24,6 @@ console.log(events)
     selectedEvents.sort((a, b) => a.startTime.localeCompare(b.startTime));
 
     function handleDeleteEvent() {
-       
         if (!selectedEventId) {
             alert("Selecione um evento para excluir.");
             return;
@@ -33,6 +32,17 @@ console.log(events)
         closeModal(setIsModalOpen, setSelectedDay, setEventDetails);
         setSelectedEventId(null); 
     }
+
+    function handleUpdateEvent(){
+        if (!selectedEventId) {
+            alert("Selecione um evento para atualizar.");
+            return;
+        }
+        updateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails);
+        closeModal(setIsModalOpen, setSelectedDay, setEventDetails);
+        setSelectedEventId(null); 
+    }
+
 
     useEffect(() => {
         if (prevSelectedDayRef.current !== selectedDay) {
@@ -83,8 +93,9 @@ console.log(events)
                 </TextTimeListEvent>
                 <div>
                     <Button onClick={handleSaveEvent}>Salvar</Button>
-                    <Button onClick={() => closeModal(setIsModalOpen, setSelectedDay, setEventDetails)}>Cancelar</Button>
+                    <Button onClick={handleUpdateEvent}>Atualizar</Button>
                     <Button onClick={handleDeleteEvent} >Excluir</Button>
+                    <Button onClick={() => closeModal(setIsModalOpen, setSelectedDay, setEventDetails)}>Cancelar</Button>
                 </div>
             </Modal>
         </Overlay>
