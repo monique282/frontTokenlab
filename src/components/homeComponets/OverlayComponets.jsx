@@ -1,9 +1,10 @@
 import "dayjs/locale/pt-br";
-import { Button, Modal, Overlay, StartTime, EndTime, TextTime, ListEvents, TextTimeListEvent } from "../../assets/styled/homeStyled";
+import { Button, Modal, Overlay, StartTime, EndTime, TextTime, TextTimeListEvent } from "../../assets/styled/homeStyled";
 import { saveEvent } from "./SalveEventComponets";
 import { deleteEvent } from "./DeleteEventsComponets";
 import { useEffect, useRef } from "react";
 import { closeModal } from "./CloseModalcomponets";
+import { ListEventsComponets } from "./ListEventsComponets";
 
 export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails, }) {
     const prevSelectedDayRef = useRef(selectedDay);
@@ -59,21 +60,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                             />
                         </EndTime>
                     </TextTime>
-                    <ListEvents>
-                        {selectedEvents.map((event, index) => (
-                            <div
-                                key={index}
-                                onClick={() => setEventDetails({
-                                    text: event.text,
-                                    startTime: event.startTime,
-                                    endTime: event.endTime
-                                })}
-                                style={{ cursor: "pointer" }} 
-                            >
-                                {`${event.startTime} às ${event.endTime} - ${event.text}`}
-                            </div>
-                        ))}
-                    </ListEvents>
+                    <ListEventsComponets setEventDetails={setEventDetails} selectedEvents={selectedEvents}/>
                 </TextTimeListEvent>
                 <div>
                     <Button onClick={handleSaveEvent}>Salvar</Button>
