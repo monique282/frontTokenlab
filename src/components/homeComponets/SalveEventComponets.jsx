@@ -1,7 +1,7 @@
 import axios from "axios";
 import { fetchEvents } from "./RequestEvents";
 
-export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventText, closeModal, setEventDetails, setEvents, authToken) {
+export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, closeModal, setEventDetails) {
     if (!selectedDay || !eventDetails.text.trim()) return;
 
     const formattedDate = selectedDay.replace(/-/g, "/");

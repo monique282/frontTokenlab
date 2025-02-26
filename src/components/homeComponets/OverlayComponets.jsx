@@ -1,20 +1,13 @@
 import "dayjs/locale/pt-br";
-import { Button, Modal, Overlay } from "../../assets/styled/homeStyled";
+import { Button, Modal, Overlay, StartTime, EndTime, TextTime, ListEvents, TextTimeListEvent } from "../../assets/styled/homeStyled";
 import { saveEvent } from "./SalveEventComponets";
 import { deleteEvent } from "./DeleteEventsComponets";
 import { useEffect, useRef } from "react";
+import { closeModal } from "./CloseModalcomponets";
 
 export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails, }) {
     const prevSelectedDayRef = useRef(selectedDay);
-    function closeModal() {
-        setIsModalOpen(false);
-        setSelectedDay(null);
-        setEventDetails({
-            text: "",
-            startTime: "",
-            endTime: ""
-        });
-    };
+    
 
     function handleSaveEvent() {
         const { text, startTime, endTime } = eventDetails;
@@ -25,50 +18,63 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
         saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, closeModal, setEventDetails);
     }
 
-    const selectedEvent = events[selectedDay] || {};
+    const selectedEvents = events[selectedDay] ? [events[selectedDay]] : [];
+
+    selectedEvents.sort((a, b) => a.startTime.localeCompare(b.startTime));
 
     useEffect(() => {
         if (prevSelectedDayRef.current !== selectedDay) {
             setEventDetails({
-                text: selectedEvent.text || "",
-                startTime: selectedEvent.startTime || "",
-                endTime: selectedEvent.endTime || ""
+                text: "",
+                startTime: "",
+                endTime: ""
             });
-            prevSelectedDayRef.current = selectedDay; 
+            prevSelectedDayRef.current = selectedDay;
         }
-    }, [selectedDay, selectedEvent, setEventDetails]); 
-
+    }, [selectedDay, setEventDetails]);
+    console.log(selectedEvents)
     return (
         <Overlay>
             <Modal>
-                <h3>Adicionar Evento</h3>
-                <textarea
-                    type="text"
-                    value={selectedEvent.text} 
-                    onChange={(e) => setEventDetails({ ...eventDetails, text: e.target.value })} 
-                />
-                <div>
-                    <label>Hora de Início:</label>
-                    <input
-                        type="time"
-                        value={selectedEvent.startTime} 
-                        onChange={(e) => setEventDetails({ ...eventDetails, startTime: e.target.value })}
-                    />
-                </div>
-                <div>
-                    <label>Hora de Término:</label>
-                    <input
-                        type="time"
-                        value={selectedEvent.endTime}
-                        onChange={(e) => setEventDetails({ ...eventDetails, endTime: e.target.value })} 
-                    />
-                </div>
+                <TextTimeListEvent>
+                    <TextTime>
+                        <h3>Adicionar Evento</h3>
+                        <textarea
+                            type="text"
+                            value={selectedEvents.text}
+                            onChange={(e) => setEventDetails({ ...eventDetails, text: e.target.value })}
+                        />
+                        <StartTime>
+                            <label>Hora de Início:</label>
+                            <input
+                                type="time"
+                                value={eventDetails.startTime}
+                                onChange={(e) => setEventDetails({ ...eventDetails, startTime: e.target.value })}
+                            />
+                        </StartTime>
+                        <EndTime>
+                            <label>Hora de Término:</label>
+                            <input
+                                type="time"
+                                value={eventDetails.endTime}
+                                onChange={(e) => setEventDetails({ ...eventDetails, endTime: e.target.value })}
+                            />
+                        </EndTime>
+                    </TextTime>
+                    <ListEvents>
+                        {selectedEvents.map((event, index) => (
+                            <div key={index}>
+                                {`${event.startTime} às ${event.endTime} - ${event.text}`}
+                            </div>
+                        ))}
+                    </ListEvents>
+                </TextTimeListEvent>
                 <div>
                     <Button onClick={handleSaveEvent}>Salvar</Button>
-                    <Button onClick={closeModal}>Cancelar</Button>
+                    <Button onClick={() => closeModal(setIsModalOpen, setSelectedDay, setEventDetails)}>Cancelar</Button>
                     <Button onClick={() => deleteEvent(selectedDay, events, setEvents, closeModal, authToken)}>Excluir</Button>
                 </div>
             </Modal>
         </Overlay>
-    )
+    );
 }

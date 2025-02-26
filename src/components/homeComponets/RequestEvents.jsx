@@ -9,9 +9,23 @@ export function fetchEvents(setEvents, authToken) {
     })
         .then(response => {
             const data = response.data;
-            const eventsObject = data.reduce((acc, event) => {
-                const formattedDate = dayjs(event.day, "DD/MM/YYYY").format("YYYY-MM-DD");
-                acc[formattedDate] = { id: event.id, text: event.text, startTime: event.startTime, endTime: event.endTime };
+
+            const eventsObject = data.flat().reduce((acc, eventGroup) => {
+                const formattedDate = dayjs(eventGroup.day, "YYYY/MM/DD").format("YYYY-MM-DD");
+
+                if (!acc[formattedDate]) {
+                    acc[formattedDate] = [];
+                }
+
+                eventGroup.events.forEach(event => {
+                    acc[formattedDate].push({
+                        id: event.id,
+                        text: event.text,
+                        startTime: event.startTime,
+                        endTime: event.endTime
+                    });
+                });
+
                 return acc;
             }, {});
             setEvents(eventsObject);
@@ -20,4 +34,3 @@ export function fetchEvents(setEvents, authToken) {
             console.error("Erro ao buscar eventos:", error);
         });
 }
-

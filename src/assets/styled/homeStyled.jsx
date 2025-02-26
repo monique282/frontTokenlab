@@ -83,14 +83,14 @@ export const Modal = styled.div`
   background: white;
   padding: 20px;
   border-radius: 8px;
-  width: 50vw;
+  width: 80vw;
   height: 70vh;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   min-width: 300px;
 
   textarea {
-    width: 98%;
+    width: 100%;
     height: 55%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -103,8 +103,8 @@ export const Modal = styled.div`
   }
 
   input {
-    width: 98%;
-    height: 80%;
+    width: 100%;
+    height: 60%;
     padding: 8px;
     margin: 10px 0;
   }
@@ -114,3 +114,36 @@ export const Modal = styled.div`
     justify-content: space-around;
   }
 `;
+export const TextTimeListEvent = styled.div`
+    display: flex;
+    height: 90%;
+
+`
+export const TextTime = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 90%;
+  margin-bottom: 10px;
+  margin-right: 10px;
+`;
+
+export const ListEvents = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 90%;
+`;
+
+export const StartTime= styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const EndTime = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
