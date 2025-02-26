@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login.jsx";
-import AuthProvider from "./contexts/contex.jsx";
 import Register from "./pages/Register.jsx";
 import Home from "./pages/Home.jsx";
+import AuthProvider from "./contexts/contex.jsx";
 
 function App() {
   return (

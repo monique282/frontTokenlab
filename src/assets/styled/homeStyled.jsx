@@ -41,8 +41,8 @@ export const Grid = styled.div`
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-weight: bold;
-  margin-bottom: 50px;
-  margin-top: 50px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 `;
 
 export const Day = styled.div`
@@ -52,5 +52,65 @@ export const Day = styled.div`
   margin: 5px;
   background: ${(props) => (props.isToday ? "#e30de3" : "#f0f0f0")};
   color: ${(props) => (props.isToday ? "white" : "black")};
-  ${(props) => props.isToday && "pointer-events: none;"}
+  ${(props) => props.isToday && "pointer-events: none;"};
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    background: #d1c4e9;
+  }
+
+  span {
+    font-size: 14px;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+  }
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Modal = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50vw;
+  height: 50vh;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 300px;
+
+  textarea {
+    width: 98%;
+    height: 80%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none; 
+    font-size: 12px;
+    line-height: 1.4;
+    overflow-y: auto; 
+  }
+
+  input {
+    width: 98%;
+    height: 80%;
+    padding: 8px;
+    margin: 10px 0;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-around;
+  }
 `;
