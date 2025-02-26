@@ -29,9 +29,9 @@ export default function Home() {
 
     // Abre o modal e carrega evento existente, se houver.
     function openModal(day) {
-        const formattedDate = day.format("YYYY-MM-DD"); // Formatar a data clicada
+        const formattedDate = day.format("YYYY-MM-DD"); 
         setSelectedDay(formattedDate);
-        setEventText(events[formattedDate] || ""); // Verificar se existe evento para essa data
+        setEventText(events[formattedDate] || ""); 
         setIsModalOpen(true);
     };
 
@@ -57,8 +57,8 @@ export default function Home() {
                     {days.map(day => (
                         <Day
                             key={day.format("YYYY-MM-DD")}
-                            isToday={day.isSame(dayjs(), "day")}
-                            onClick={() => openModal(day)}
+                            isToday={day.format("YYYY-MM-DD") === dayjs().format("YYYY-MM-DD")}
+                            onClick={() => { openModal(day);  }}
                         >
                             {day.date()}
                             {events[day.format("YYYY-MM-DD")] && <span>📌</span>}

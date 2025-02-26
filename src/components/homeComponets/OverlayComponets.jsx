@@ -23,7 +23,8 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                     ...prevEvents,
                     [selectedDay]: eventText
                 }));
-
+                setSelectedDay(null);
+                setEventText("");
                 closeModal();
             })
             .catch(error => {

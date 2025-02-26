@@ -52,8 +52,7 @@ export const Day = styled.div`
   margin: 5px;
   background: ${(props) => (props.isToday ? "#e30de3" : "#f0f0f0")};
   color: ${(props) => (props.isToday ? "white" : "black")};
-  ${(props) => props.isToday && "pointer-events: none;"};
-  cursor: pointer;
+  pointer-events: auto;  cursor: pointer;
   position: relative;
 
   &:hover {
