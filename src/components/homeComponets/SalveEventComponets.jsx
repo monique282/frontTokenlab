@@ -1,5 +1,5 @@
 import axios from "axios";
-import { closeModal } from "./CloseModalcomponets";
+import { closeModal } from "./CloseModalComponets";
 import { fetchEvents } from "./RequestEventsComponets";
 
 export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen) {

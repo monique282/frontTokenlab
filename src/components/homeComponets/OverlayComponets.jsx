@@ -1,13 +1,13 @@
 import "dayjs/locale/pt-br";
-import { Button, Modal, Overlay, StartTime, EndTime, TextTime, TextTimeListEvent } from "../../assets/styled/homeStyled";
-import { saveEvent } from "./SalveEventComponets";
-import { deleteEvent } from "./DeleteEventsComponets";
 import { useEffect, useRef, useState } from "react";
-import { closeModal } from "./CloseModalcomponets";
+import { Button, EndTime, Modal, Overlay, StartTime, TextTime, TextTimeListEvent } from "../../assets/styled/homeStyled";
+import { isTimeOverlapping } from "../../utils/timeOverlap";
+import { closeModal } from "./CloseModalComponets";
+import { deleteEvent } from "./DeleteEventsComponets";
+import { handleSaveEvent } from "./HandleSaveEventComponets";
 import { ListEventsComponets } from "./ListEventsComponets";
 import { updateEvent } from "./UpdateEventComponets";
-import { isTimeOverlapping } from "../../utils/timeOverlap";
-import { handleSaveEvent } from "./handleSaveEventComponets";
+import { handleUpdateEvent } from "./HandleUpdateEventComponets";
 
 export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails, }) {
     const [selectedEventId, setSelectedEventId] = useState(null);
@@ -26,29 +26,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
         setSelectedEventId(null); 
     }
 
-    function handleUpdateEvent() {
-        if (!selectedEventId) {
-            alert("Selecione um evento para atualizar.");
-            return;
-        }
-
-        const { text, startTime, endTime } = eventDetails;
-        if (!text.trim() || !startTime || !endTime) {
-            alert("Por favor, preencha todos os campos.");
-            return;
-        }
-
-        const existingEvents = events[selectedDay] || [];
-
-        if (isTimeOverlapping(startTime, endTime, existingEvents)) {
-            alert("O horário do evento entra em conflito com outro evento já existente.");
-            return;
-        }
-
-        updateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails);
-        closeModal(setIsModalOpen, setSelectedDay, setEventDetails);
-        setSelectedEventId(null);
-    }
+   
 
     useEffect(() => {
         if (prevSelectedDayRef.current !== selectedDay) {
@@ -99,7 +77,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                 </TextTimeListEvent>
                 <div>
                     <Button onClick={() => handleSaveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, events)}>Salvar</Button>
-                    <Button onClick={handleUpdateEvent}>Atualizar</Button>
+                    <Button onClick={() => handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen)}>Atualizar</Button>
                     <Button onClick={handleDeleteEvent} >Excluir</Button>
                     <Button onClick={() => closeModal(setIsModalOpen, setSelectedDay, setEventDetails)}>Cancelar</Button>
                 </div>
