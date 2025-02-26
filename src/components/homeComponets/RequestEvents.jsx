@@ -11,7 +11,7 @@ export function fetchEvents(setEvents, authToken) {
             const data = response.data;
             const eventsObject = data.reduce((acc, event) => {
                 const formattedDate = dayjs(event.day, "DD/MM/YYYY").format("YYYY-MM-DD");
-                acc[formattedDate] = event.text;
+                acc[formattedDate] = { id: event.id, text: event.text };
                 return acc;
             }, {});
             setEvents(eventsObject);

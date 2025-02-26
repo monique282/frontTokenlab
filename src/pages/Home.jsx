@@ -17,7 +17,6 @@ export default function Home() {
     const [eventText, setEventText] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-
     // Primeiro dia do mês atual.
     const startOfMonth = currentDate.startOf("month");
     // Número total de dias no mês atual.
@@ -31,7 +30,7 @@ export default function Home() {
     function openModal(day) {
         const formattedDate = day.format("YYYY-MM-DD"); 
         setSelectedDay(formattedDate);
-        setEventText(events[formattedDate] || ""); 
+        setEventText(events[formattedDate]?.text || ""); 
         setIsModalOpen(true);
     };
 
@@ -68,7 +67,7 @@ export default function Home() {
             </CalendarContainer>
 
             {isModalOpen && (
-                <OverlayComponets authToken={authToken} selectedDay={selectedDay} setSelectedDay={setSelectedDay} setIsModalOpen={setIsModalOpen} setEvents={setEvents} setEventText={setEventText} eventText= {eventText}/>
+                <OverlayComponets authToken={authToken} selectedDay={selectedDay} setSelectedDay={setSelectedDay} setIsModalOpen={setIsModalOpen} setEvents={setEvents} setEventText={setEventText} eventText={eventText} events={events}/>
             )}
         </All>
     );
