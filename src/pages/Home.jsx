@@ -65,7 +65,7 @@ export default function Home() {
                             onClick={() => { openModal(day);  }}
                         >
                             {day.date()}
-                            {events[day.format("YYYY-MM-DD")] && <span>📌</span>}
+                            {events[day.format("YYYY-MM-DD")]?.length > 0 && <span>📌</span>}
                         </Day>
                     ))}
                 </Grid>
