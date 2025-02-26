@@ -2,8 +2,11 @@ import "dayjs/locale/pt-br";
 import { Button, Modal, Overlay } from "../../assets/styled/homeStyled";
 import { saveEvent } from "./SalveEventComponets";
 import { deleteEvent } from "./DeleteEventsComponets";
+import { useEffect, useRef } from "react";
 
-export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, setEventText, eventDetails, events, setEventDetails }) {
+export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails }) {
+
+    const prevSelectedDayRef = useRef(selectedDay);
 
     function closeModal() {
         setIsModalOpen(false);
@@ -24,20 +27,33 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
         saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, closeModal, setEventDetails);
     }
 
+    const selectedEvent = events[selectedDay] || {};
+
+    useEffect(() => {
+        if (prevSelectedDayRef.current !== selectedDay) {
+            setEventDetails({
+                text: selectedEvent.text || "",
+                startTime: selectedEvent.startTime || "",
+                endTime: selectedEvent.endTime || ""
+            });
+            prevSelectedDayRef.current = selectedDay; 
+        }
+    }, [selectedDay, selectedEvent, setEventDetails]); 
+
     return (
         <Overlay>
             <Modal>
                 <h3>Adicionar Evento</h3>
                 <textarea
                     type="text"
-                    value={eventDetails.text}
-                    onChange={(e) => setEventDetails({ ...eventDetails, text: e.target.value })}
+                    value={selectedEvent.text} 
+                    onChange={(e) => setEventDetails({ ...eventDetails, text: e.target.value })} 
                 />
                 <div>
                     <label>Hora de Início:</label>
                     <input
                         type="time"
-                        value={eventDetails.startTime}
+                        value={selectedEvent.startTime} 
                         onChange={(e) => setEventDetails({ ...eventDetails, startTime: e.target.value })}
                     />
                 </div>
@@ -45,8 +61,8 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                     <label>Hora de Término:</label>
                     <input
                         type="time"
-                        value={eventDetails.endTime}
-                        onChange={(e) => setEventDetails({ ...eventDetails, endTime: e.target.value })}
+                        value={selectedEvent.endTime}
+                        onChange={(e) => setEventDetails({ ...eventDetails, endTime: e.target.value })} 
                     />
                 </div>
                 <div>
