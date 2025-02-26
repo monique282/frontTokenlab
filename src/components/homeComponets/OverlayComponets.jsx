@@ -18,8 +18,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
         saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, closeModal, setEventDetails);
     }
 
-    const selectedEvents = events[selectedDay] ? [events[selectedDay]] : [];
-
+    const selectedEvents = events[selectedDay] || [];
     selectedEvents.sort((a, b) => a.startTime.localeCompare(b.startTime));
 
     useEffect(() => {
@@ -32,7 +31,6 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
             prevSelectedDayRef.current = selectedDay;
         }
     }, [selectedDay, setEventDetails]);
-    console.log(selectedEvents)
     return (
         <Overlay>
             <Modal>
@@ -41,7 +39,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                         <h3>Adicionar Evento</h3>
                         <textarea
                             type="text"
-                            value={selectedEvents.text}
+                            value={eventDetails.text}
                             onChange={(e) => setEventDetails({ ...eventDetails, text: e.target.value })}
                         />
                         <StartTime>
@@ -63,7 +61,15 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                     </TextTime>
                     <ListEvents>
                         {selectedEvents.map((event, index) => (
-                            <div key={index}>
+                            <div
+                                key={index}
+                                onClick={() => setEventDetails({
+                                    text: event.text,
+                                    startTime: event.startTime,
+                                    endTime: event.endTime
+                                })}
+                                style={{ cursor: "pointer" }} 
+                            >
                                 {`${event.startTime} às ${event.endTime} - ${event.text}`}
                             </div>
                         ))}
