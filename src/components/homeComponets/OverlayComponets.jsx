@@ -1,43 +1,19 @@
 import "dayjs/locale/pt-br";
 import { Button, Modal, Overlay } from "../../assets/styled/homeStyled";
-import axios from "axios";
+import { saveEvent } from "./SalveEventComponets";
 
 export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, setEventText, eventText }) {
 
-    function saveEvent() {
-        if (!selectedDay || !eventText.trim()) return;
-
-        const formattedDate = selectedDay.replace(/-/g, "/"); 
-        const urlCode = `${import.meta.env.VITE_API_URL}/events`;
-        const data = {
-            text: eventText,
-            day: formattedDate
-        };
-        axios.post(urlCode, data ,{
-            headers: { Authorization: `Bearer ${authToken}` }
-            , data
-        })
-        
-            .then(() => {
-                setEvents(prevEvents => ({
-                    ...prevEvents,
-                    [selectedDay]: eventText
-                }));
-                setSelectedDay(null);
-                setEventText("");
-                closeModal();
-            })
-            .catch(error => {
-                console.error("Erro ao salvar evento:", error);
-            });
-    }
-
+    
     function closeModal() {
         setIsModalOpen(false);
         setSelectedDay(null);
         setEventText("");
     };
 
+    function deleteEvent(){
+
+    }
 
     return (
         <Overlay>
@@ -49,8 +25,9 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                     onChange={(e) => setEventText(e.target.value)}
                 />
                 <div>
-                    <Button onClick={saveEvent}>Salvar</Button>
+                    <Button onClick={() => saveEvent(selectedDay, eventText, authToken, setEvents, setSelectedDay, setEventText, closeModal)}>Salvar</Button>
                     <Button onClick={closeModal}>Cancelar</Button>
+                    <Button onClick={deleteEvent}>Excluir</Button>
                 </div>
             </Modal>
         </Overlay>
