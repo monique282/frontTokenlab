@@ -16,7 +16,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
             alert("Por favor, preencha todos os campos.");
             return;
         }
-        saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, closeModal, setEventDetails);
+        saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen);
     }
 
     const selectedEvents = events[selectedDay] || [];

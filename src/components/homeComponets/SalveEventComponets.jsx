@@ -1,7 +1,8 @@
 import axios from "axios";
 import { fetchEvents } from "./RequestEvents";
+import { closeModal } from "./CloseModalcomponets";
 
-export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, closeModal, setEventDetails) {
+export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen) {
     if (!selectedDay || !eventDetails.text.trim()) return;
 
     const formattedDate = selectedDay.replace(/-/g, "/");
@@ -32,7 +33,7 @@ export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSe
                 startTime: "",
                 endTime: ""
             });            
-            closeModal();
+            closeModal(setIsModalOpen, setSelectedDay, setEventDetails);
         })
         .catch(error => {
             console.error("Erro ao salvar evento:", error);
