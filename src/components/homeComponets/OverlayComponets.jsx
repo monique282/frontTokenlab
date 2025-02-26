@@ -4,10 +4,8 @@ import { saveEvent } from "./SalveEventComponets";
 import { deleteEvent } from "./DeleteEventsComponets";
 import { useEffect, useRef } from "react";
 
-export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails }) {
-
+export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails, }) {
     const prevSelectedDayRef = useRef(selectedDay);
-
     function closeModal() {
         setIsModalOpen(false);
         setSelectedDay(null);
