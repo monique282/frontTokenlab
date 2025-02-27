@@ -9,7 +9,6 @@ export function OkComponets({cpfEmail, password }) {
     const { setAuthToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
-
     function LoginPost() {
         const urlCode = `${import.meta.env.VITE_API_URL}/login`;
         const data = {
@@ -23,12 +22,12 @@ export function OkComponets({cpfEmail, password }) {
                 if (token) {
                     localStorage.setItem('authToken', token);
                     navigate("/home");
-                }
+                };
             })
             .catch((err) => {
                 console.error('Erro na requisição:', err.response?.data || err.message);
             });
-    }
+    };
 
     const isButtonDisabled = !(cpfEmail && password)
 
@@ -44,5 +43,5 @@ export function OkComponets({cpfEmail, password }) {
         >
             Login
         </Ok>
-    )
-}
+    );
+};

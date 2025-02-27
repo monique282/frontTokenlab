@@ -6,8 +6,7 @@ export function ConfirmPasswordComponets({ confirmPassword, setConfirmPassword, 
 
     function toggleConfirmPasswordVisibility() {
         setShowConfirmPassword(!showConfirmPassword);
-    }
-
+    };
 
     return (
         <PassWord>
@@ -24,5 +23,5 @@ export function ConfirmPasswordComponets({ confirmPassword, setConfirmPassword, 
                 {showConfirmPassword ? <FaEye style={{ fontSize: "30px", color: "#E837AB" }} /> : <FaEyeSlash style={{ fontSize: "30px", color: "#E837AB" }} />}
             </button>
         </PassWord>
-    )
-}
+    );
+};

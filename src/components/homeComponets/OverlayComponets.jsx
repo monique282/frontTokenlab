@@ -29,6 +29,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
             prevSelectedDayRef.current = selectedDay;
         }
     }, [selectedDay, setEventDetails]);
+
     return (
         <Overlay>
             <Modal>
@@ -52,4 +53,4 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
             {alertMessage && <AlertModal message={alertMessage} onClose={() => setAlertMessage("")} />}
         </Overlay>
     );
-}
+};

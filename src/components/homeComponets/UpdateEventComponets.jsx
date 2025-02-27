@@ -2,6 +2,7 @@ import axios from "axios";
 import { fetchEvents } from "./RequestEventsComponets";
 
 export function updateEvent(eventId, setEvents, authToken, eventDetails, setEventDetails) {
+    
     if (!eventId) return;
 
     const urlCode = `${import.meta.env.VITE_API_URL}/events/${eventId}`;
@@ -9,7 +10,7 @@ export function updateEvent(eventId, setEvents, authToken, eventDetails, setEven
         text: eventDetails.text,
         startTime: eventDetails.startTime,
         endTime: eventDetails.endTime
- }
+        };
     axios.put(urlCode, data,{
         headers: { Authorization: `Bearer ${authToken}` }
     })
@@ -24,4 +25,4 @@ export function updateEvent(eventId, setEvents, authToken, eventDetails, setEven
         .catch(error => {
             console.error("Erro ao atualizar o evento:", error);
         });
-}
+};

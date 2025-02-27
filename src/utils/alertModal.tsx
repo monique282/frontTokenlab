@@ -15,4 +15,4 @@ export function AlertModal({ message, onClose }: AlertModalProps) {
             </ModalContainer>
         </Overlay>
     );
-}
+};

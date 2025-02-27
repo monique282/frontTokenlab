@@ -114,11 +114,12 @@ export const Modal = styled.div`
     justify-content: space-around;
   }
 `;
+
 export const TextTimeListEvent = styled.div`
     display: flex;
     height: 90%;
+`;
 
-`
 export const TextTime = styled.div`
   display: flex;
   flex-direction: column;
@@ -140,10 +141,11 @@ export const StartTime= styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
+
 export const EndTime = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;

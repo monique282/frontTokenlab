@@ -18,4 +18,4 @@ export function EmailCpfLoginComponets( {cpfEmail, setCpfEmail }) {
             />
         </EmailCpf>
     )
-}
+};

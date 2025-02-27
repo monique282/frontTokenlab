@@ -6,7 +6,7 @@ export function PasswordComponets({ password, setPassword, setShowPassword, show
     
     function togglePasswordVisibility() {
         setShowPassword(!showPassword);
-    }
+    };
 
     return (
         <PassWord>
@@ -23,5 +23,5 @@ export function PasswordComponets({ password, setPassword, setShowPassword, show
                 {showPassword ? <FaEye style={{ fontSize: "30px", color: "#E837AB" }} /> : <FaEyeSlash style={{ fontSize: "30px", color: "#E837AB" }} />}
             </button>
         </PassWord>
-    )
-}
+    );
+};

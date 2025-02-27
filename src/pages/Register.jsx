@@ -18,7 +18,6 @@ export default function Register() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
 
-
     function RegisterPost() {
         if (password !== confirmPassword) {
             window.alert("As senhas não conferem");
@@ -38,10 +37,9 @@ export default function Register() {
                 console.log(err.response);
                 alert(err.response.data)
             });
-        }
-    }
+        };
+    };
     const isButtonDisabled = !(cpf && password && name && email && confirmPassword)
-
 
     return (
         <All>
@@ -68,4 +66,4 @@ export default function Register() {
             </Conteiner>
         </All >
     );
-}
+};

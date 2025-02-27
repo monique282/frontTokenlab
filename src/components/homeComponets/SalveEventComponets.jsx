@@ -3,6 +3,7 @@ import { closeModal } from "./CloseModalComponets";
 import { fetchEvents } from "./RequestEventsComponets";
 
 export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen) {
+    
     if (!selectedDay || !eventDetails.text.trim()) return;
 
     const formattedDate = selectedDay.replace(/-/g, "/");
@@ -38,4 +39,4 @@ export function saveEvent(selectedDay, eventDetails, authToken, setEvents, setSe
         .catch(error => {
             console.error("Erro ao salvar evento:", error);
         });
-}
+};

@@ -30,4 +30,4 @@ export function TextTimeComponets({eventDetails, setEventDetails}) {
         </TextTime>
 
     );
-}
+};

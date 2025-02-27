@@ -116,5 +116,5 @@ export const Ok = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  color: black
+  color: black;
 `;

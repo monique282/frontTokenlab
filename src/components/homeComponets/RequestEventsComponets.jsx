@@ -2,6 +2,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 
 export function fetchEvents(setEvents, authToken) {
+    
     const urlCode = `${import.meta.env.VITE_API_URL}/events`;
 
     axios.get(urlCode, {
@@ -33,4 +34,4 @@ export function fetchEvents(setEvents, authToken) {
         .catch(error => {
             console.error("Erro ao buscar eventos:", error);
         });
-}
+};

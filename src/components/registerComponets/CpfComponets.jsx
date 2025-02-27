@@ -20,5 +20,5 @@ export function CpfComponets({ cpf, setCpf }) {
                 }}
             />
         </InputInformation>
-    )
-}
+    );
+};

@@ -6,7 +6,6 @@ import { PasswordComponets } from '../components/loginComponets/passwordComponet
 import { SaveResgisterComponets } from '../components/loginComponets/saveResgisterComponets';
 import { OkComponets } from '../components/loginComponets/OkComponets';
 
-
 export default function Login() {
     const [cpfEmail, setCpfEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -44,4 +43,4 @@ export default function Login() {
             </Conteiner>
         </All >
     );
-}
+};

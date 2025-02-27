@@ -3,6 +3,7 @@ import { ListEvents } from "../../assets/styled/homeStyled";
 
 
 export function ListEventsComponets({ setEventDetails, selectedEvents }) {
+    
     return (
         <ListEvents>
             {selectedEvents.map((event) => (
@@ -22,4 +23,4 @@ export function ListEventsComponets({ setEventDetails, selectedEvents }) {
         </ListEvents>
                 
     );
-}
+};

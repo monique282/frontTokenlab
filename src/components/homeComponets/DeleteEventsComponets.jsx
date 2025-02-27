@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export function deleteEvent(eventId, selectedDay, setEvents, authToken) {
+    
     if (!eventId) return;
 
     const urlCode = `${import.meta.env.VITE_API_URL}/events/${eventId}`;
@@ -18,4 +19,4 @@ export function deleteEvent(eventId, selectedDay, setEvents, authToken) {
         .catch(error => {
             console.error("Erro ao excluir o evento:", error);
         });
-}
+};

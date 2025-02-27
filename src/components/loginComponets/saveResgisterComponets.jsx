@@ -11,5 +11,5 @@ export function SaveResgisterComponets() {
                 </Link>
             </RegisterLink>
         </SaveRegister>
-    )
-}
+    );
+};
