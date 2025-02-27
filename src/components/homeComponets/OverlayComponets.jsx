@@ -14,6 +14,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
     const [selectedEventId, setSelectedEventId] = useState(null);
     const prevSelectedDayRef = useRef(selectedDay);
     const [alertMessage, setAlertMessage] = useState(""); 
+    const [confirmAction, setConfirmAction] = useState(null);
 
     const selectedEvents = events[selectedDay] || [];
     selectedEvents.sort((a, b) => a.startTime.localeCompare(b.startTime));
@@ -44,13 +45,19 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                     />
                 </TextTimeListEvent>
                 <div>
-                    <Button onClick={() => handleSaveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, events, setAlertMessage)}>Salvar</Button>
-                    <Button onClick={() => handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen, setAlertMessage)}>Atualizar</Button>
-                    <Button onClick={() => handleDeleteEvent(selectedEventId, selectedDay, setEvents, authToken, setIsModalOpen, setSelectedDay, setEventDetails, setSelectedEventId, setAlertMessage)} >Excluir</Button>
+                    <Button onClick={() => handleSaveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, events, setAlertMessage, setConfirmAction)}>Salvar</Button>
+                    <Button onClick={() => handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen, setAlertMessage, setConfirmAction)}>Atualizar</Button>
+                    <Button onClick={() => handleDeleteEvent(selectedEventId, selectedDay, setEvents, authToken, setIsModalOpen, setSelectedDay, setEventDetails, setSelectedEventId, setAlertMessage, setConfirmAction)} >Excluir</Button>
                     <Button onClick={() => closeModal(setIsModalOpen, setSelectedDay, setEventDetails)}>Cancelar</Button>
                 </div>
             </Modal>
-            {alertMessage && <AlertModal message={alertMessage} onClose={() => setAlertMessage("")} />}
+            {alertMessage && <AlertModal message={alertMessage} onClose={() => {
+                setAlertMessage("");
+                if (confirmAction) {
+                    confirmAction(); 
+                    setConfirmAction(null);
+                }
+            }} />}
         </Overlay>
     );
 };

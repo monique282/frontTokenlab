@@ -1,6 +1,7 @@
 import axios from "axios";
+import { closeModal } from "./CloseModalComponets";
 
-export function deleteEvent(eventId, selectedDay, setEvents, authToken) {
+export function deleteEvent(eventId, selectedDay, setEvents, authToken, setConfirmAction, setIsModalOpen, setSelectedDay, setEventDetails, setAlertMessage) {
     
     if (!eventId) return;
 
@@ -15,6 +16,8 @@ export function deleteEvent(eventId, selectedDay, setEvents, authToken) {
                 updatedEvents[selectedDay] = updatedEvents[selectedDay].filter(event => event.id !== eventId);
                 return updatedEvents;
             });
+            setAlertMessage("Evento excluido com sucesso");
+            setConfirmAction(() => () => closeModal(setIsModalOpen, setSelectedDay, setEventDetails));
         })
         .catch(error => {
             console.error("Erro ao excluir o evento:", error);

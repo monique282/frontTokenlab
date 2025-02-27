@@ -1,7 +1,7 @@
 import { isTimeOverlapping } from "../../utils/timeOverlap";
 import { saveEvent } from "./SalveEventComponets";
 
-export function handleSaveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, events, setAlertMessage) {
+export function handleSaveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, events, setAlertMessage, setConfirmAction) {
     
     const { text, startTime, endTime } = eventDetails;
     
@@ -17,5 +17,5 @@ export function handleSaveEvent(selectedDay, eventDetails, authToken, setEvents,
         return;
     };
 
-    saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen);
+    saveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, setAlertMessage, setConfirmAction);
 };

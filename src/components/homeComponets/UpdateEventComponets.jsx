@@ -1,7 +1,8 @@
 import axios from "axios";
 import { fetchEvents } from "./RequestEventsComponets";
+import { closeModal } from "./CloseModalComponets";
 
-export function updateEvent(eventId, setEvents, authToken, eventDetails, setEventDetails) {
+export function updateEvent(eventId, setEvents, authToken, eventDetails, setEventDetails, setAlertMessage, setIsModalOpen, setSelectedDay, setConfirmAction) {
     
     if (!eventId) return;
 
@@ -21,6 +22,8 @@ export function updateEvent(eventId, setEvents, authToken, eventDetails, setEven
                 startTime: "",
                 endTime: ""
             });
+            setAlertMessage("Evento atualizado com sucesso");
+            setConfirmAction(() => () => closeModal(setIsModalOpen, setSelectedDay, setEventDetails));
         })
         .catch(error => {
             console.error("Erro ao atualizar o evento:", error);

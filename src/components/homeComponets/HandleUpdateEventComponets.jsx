@@ -1,14 +1,13 @@
 import { isTimeOverlapping } from "../../utils/timeOverlap";
-import { closeModal } from "./CloseModalComponets";
 import { updateEvent } from "./UpdateEventComponets";
 
-export function handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen, setAlertMessage) {
+export function handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen, setAlertMessage, setConfirmAction) {
     
     if (!selectedEventId) {
+        setAlertMessage("Selecione um evento para atualizar.");
         return;
     };
-       setAlertMessage("Selecione um evento para atualizar.");
- 
+       
     const { text, startTime, endTime } = eventDetails;
     if (!text.trim() || !startTime || !endTime) {
         alert("Por favor, preencha todos os campos.");
@@ -23,7 +22,6 @@ export function handleUpdateEvent(selectedEventId, setEvents, authToken, eventDe
         return;
     };
 
-    updateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails);
-    closeModal(setIsModalOpen, setSelectedDay, setEventDetails);
+    updateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, setAlertMessage, setIsModalOpen, setSelectedDay, setConfirmAction);
     setSelectedEventId(null);
 };
