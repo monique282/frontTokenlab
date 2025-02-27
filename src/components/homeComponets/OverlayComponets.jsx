@@ -6,11 +6,14 @@ import { handleSaveEvent } from "./HandleSaveEventComponets";
 import { ListEventsComponets } from "./ListEventsComponets";
 import { handleUpdateEvent } from "./HandleUpdateEventComponets";
 import { TextTimeComponets } from "./TextTimeComponets";
+import { handleDeleteEvent } from "./HandleDeleteEventComponets";
+import { AlertModal } from "../../utils/alertModal";
 
-export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails, }) {
+export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIsModalOpen, setEvents, eventDetails, events, setEventDetails }) {
 
     const [selectedEventId, setSelectedEventId] = useState(null);
     const prevSelectedDayRef = useRef(selectedDay);
+    const [alertMessage, setAlertMessage] = useState(""); 
 
     const selectedEvents = events[selectedDay] || [];
     selectedEvents.sort((a, b) => a.startTime.localeCompare(b.startTime));
@@ -42,10 +45,11 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                 <div>
                     <Button onClick={() => handleSaveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, events)}>Salvar</Button>
                     <Button onClick={() => handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen)}>Atualizar</Button>
-                    <Button onClick={() => handleDeleteEvent(selectedEventId, selectedDay, setEvents, authToken, setIsModalOpen, setSelectedDay, setEventDetails, setSelectedEventId)} >Excluir</Button>
+                    <Button onClick={() => handleDeleteEvent(selectedEventId, selectedDay, setEvents, authToken, setIsModalOpen, setSelectedDay, setEventDetails, setSelectedEventId, setAlertMessage)} >Excluir</Button>
                     <Button onClick={() => closeModal(setIsModalOpen, setSelectedDay, setEventDetails)}>Cancelar</Button>
                 </div>
             </Modal>
+            {alertMessage && <AlertModal message={alertMessage} onClose={() => setAlertMessage("")} />}
         </Overlay>
     );
 }

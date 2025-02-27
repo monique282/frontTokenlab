@@ -1,9 +1,9 @@
 import { closeModal } from "./CloseModalComponets";
 import { deleteEvent } from "./DeleteEventsComponets";
 
-export function handleDeleteEvent(selectedEventId, selectedDay, setEvents, authToken, setIsModalOpen, setSelectedDay, setEventDetails, setSelectedEventId) {
+export function handleDeleteEvent(selectedEventId, selectedDay, setEvents, authToken, setIsModalOpen, setSelectedDay, setEventDetails, setSelectedEventId, setAlertMessage) {
     if (!selectedEventId) {
-        alert("Selecione um evento para excluir.");
+        setAlertMessage("Selecione um evento para excluir.");
         return;
     }
     deleteEvent(selectedEventId, selectedDay, setEvents, authToken);

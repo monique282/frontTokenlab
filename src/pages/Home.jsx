@@ -21,6 +21,8 @@ export default function Home() {
         startTime: "",
         endTime: ""
     });
+    const [alertMessage, setAlertMessage] = useState("")
+
 
     // Primeiro dia do mês atual.
     const startOfMonth = currentDate.startOf("month");
