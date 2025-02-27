@@ -14,7 +14,7 @@ export function ConfirmPasswordComponets({ confirmPassword, setConfirmPassword, 
                 <GiPadlock />
             </IconePassword>
             <InputPassword
-                type="text"
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirme a senha a senha"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
