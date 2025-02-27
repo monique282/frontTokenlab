@@ -1,7 +1,19 @@
 import { EndTime, StartTime, TextTime } from "../../assets/styled/homeStyled";
 
+export function TextTimeComponets({ eventDetails, setEventDetails, setAlertMessage }) {
 
-export function TextTimeComponets({eventDetails, setEventDetails}) {
+    const handleTimeChange = (field, value) => {
+        let newEventDetails = { ...eventDetails, [field]: value };
+
+        if (newEventDetails.startTime && newEventDetails.endTime) {
+            if (newEventDetails.startTime > newEventDetails.endTime) {
+                setAlertMessage("O horário de início não pode ser maior que o horário de término!");
+                return;
+            };
+        };
+
+        setEventDetails(newEventDetails);
+    };
 
     return (
         <TextTime>
@@ -16,7 +28,7 @@ export function TextTimeComponets({eventDetails, setEventDetails}) {
                 <input
                     type="time"
                     value={eventDetails.startTime}
-                    onChange={(e) => setEventDetails({ ...eventDetails, startTime: e.target.value })}
+                    onChange={(e) => handleTimeChange("startTime", e.target.value)}
                 />
             </StartTime>
             <EndTime>
@@ -24,10 +36,9 @@ export function TextTimeComponets({eventDetails, setEventDetails}) {
                 <input
                     type="time"
                     value={eventDetails.endTime}
-                    onChange={(e) => setEventDetails({ ...eventDetails, endTime: e.target.value })}
+                    onChange={(e) => handleTimeChange("endTime", e.target.value)}
                 />
             </EndTime>
         </TextTime>
-
     );
 };

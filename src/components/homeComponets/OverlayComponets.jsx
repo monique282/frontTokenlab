@@ -34,7 +34,7 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
         <Overlay>
             <Modal>
                 <TextTimeListEvent>
-                    <TextTimeComponets eventDetails={eventDetails} setEventDetails={setEventDetails} />
+                    <TextTimeComponets eventDetails={eventDetails} setEventDetails={setEventDetails} setAlertMessage={setAlertMessage} />
                     <ListEventsComponets
                         setEventDetails={(details) => {
                             setEventDetails(details);
