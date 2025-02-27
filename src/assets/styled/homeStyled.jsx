@@ -15,7 +15,7 @@ export const CalendarContainer = styled.div`
   padding: 16px;
   background-color: rgba(8, 34, 234, 0.358);
   width: 90vw;  
-  height: 80vh;
+  height: 55vh;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 `;
