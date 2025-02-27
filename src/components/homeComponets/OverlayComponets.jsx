@@ -43,8 +43,8 @@ export function OverlayComponets({ authToken, selectedDay, setSelectedDay, setIs
                     />
                 </TextTimeListEvent>
                 <div>
-                    <Button onClick={() => handleSaveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, events)}>Salvar</Button>
-                    <Button onClick={() => handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen)}>Atualizar</Button>
+                    <Button onClick={() => handleSaveEvent(selectedDay, eventDetails, authToken, setEvents, setSelectedDay, setEventDetails, setIsModalOpen, events, setAlertMessage)}>Salvar</Button>
+                    <Button onClick={() => handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen, setAlertMessage)}>Atualizar</Button>
                     <Button onClick={() => handleDeleteEvent(selectedEventId, selectedDay, setEvents, authToken, setIsModalOpen, setSelectedDay, setEventDetails, setSelectedEventId, setAlertMessage)} >Excluir</Button>
                     <Button onClick={() => closeModal(setIsModalOpen, setSelectedDay, setEventDetails)}>Cancelar</Button>
                 </div>

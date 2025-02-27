@@ -2,9 +2,9 @@ import { isTimeOverlapping } from "../../utils/timeOverlap";
 import { closeModal } from "./CloseModalComponets";
 import { updateEvent } from "./UpdateEventComponets";
 
-export function handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen) {
+export function handleUpdateEvent(selectedEventId, setEvents, authToken, eventDetails, setEventDetails, events, selectedDay, setSelectedDay, setSelectedEventId, setIsModalOpen, setAlertMessage) {
     if (!selectedEventId) {
-        alert("Selecione um evento para atualizar.");
+        setAlertMessage("Selecione um evento para atualizar.");
         return;
     }
 
@@ -18,7 +18,7 @@ export function handleUpdateEvent(selectedEventId, setEvents, authToken, eventDe
     const filteredEvents = existingEvents.filter(event => event.id !== selectedEventId);
 
     if (isTimeOverlapping(startTime, endTime, filteredEvents)) {
-        alert("O horário do evento entra em conflito com outro evento já existente.");
+        setAlertMessage("O horário do evento entra em conflito com outro evento já existente.");
         return;
     }
 
